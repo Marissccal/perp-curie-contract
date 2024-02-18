@@ -3,8 +3,9 @@
 Se procede a trabajar configurando un entorno de desarrollo con Foundry y Typescript para el
 proyecto.
 Se crea dos scripts que simulan en [Optimist Goerli](https://goerli-optimism.etherscan.io/) los siguientes pasos:
-a. Depositar una cantidad específica de tokens en el Vault de Perpetual Protocol.
-b. Abrir una posición long en Perpetual Protocol.
+
+- a. Depositar una cantidad específica de tokens en el Vault de Perpetual Protocol.
+- b. Abrir una posición long en Perpetual Protocol.
 
 Me base en el siguiente repositorio:
 
@@ -34,8 +35,6 @@ npm i
 npm run build
 ```
 
-```
-
 Para correr los tests:
 
 ```bash
@@ -52,13 +51,17 @@ La wallet de prueba debera disponer de `ETH` en Optimist Goerli, por lo cual se 
 
 ## ETH a WETH
 
-Para la presente prueba se ha optado por usar como colateral a `WETH`, sin embargo el protocolo acepta varias otras coins (USDC, USDT, WBTC, etc)
+Para la presente prueba se ha optado por usar como colateral a `WETH`, sin embargo el protocolo acepta varias coins (USDC, USDT, WBTC, etc)
 
-Una vez obtenido el `ETH`, se debera intercambiar en [Uniswap](https://app.uniswap.org/swap) conectando la wallet a la red Optimist e intercambiando `ETH` por `WETH`. En `Seleccionar token` debera poner el contrato de `WETH`: 0x4200000000000000000000000000000000000006, luego hacer el intercambio que desee teniendo en cuenta siempre dejar `ETH` para pagar el gas de las tx.
+Una vez obtenido el `ETH`, se debera intercambiar en [Uniswap](https://app.uniswap.org/swap) conectando la wallet a la red Optimist e intercambiando `ETH` por `WETH`. En `Seleccionar token` debera poner el contrato de `WETH: 0x4200000000000000000000000000000000000006`, luego hacer el intercambio que desee teniendo en cuenta siempre dejar `ETH` para pagar el gas de las tx.
 
 ## Aprobar el dispenser de WETH
 
-Previo a realizar el deposito en Perpetual Protocol, debe dirigirse a [Etherescan Goerli Optimist](https://goerli-optimism.etherscan.io) y realizar el [approve](https://goerli-optimism.etherscan.io/address/0x4200000000000000000000000000000000000006#writeContract). Se conecta la wallet en `Connect to Web3` y se selecciona la funcion `1.approbe`
+Previo a realizar el deposito en Perpetual Protocol, debe dirigirse a [Etherescan Goerli Optimist](https://goerli-optimism.etherscan.io) y realizar el [approve](https://goerli-optimism.etherscan.io/address/0x4200000000000000000000000000000000000006#writeContract). Se conecta la wallet en `Connect to Web3` y se selecciona la funcion:
+
+`1.approbe`
+
+Ingresar los siguientes parametros:
 
 ```bash
 guy 0x253D7430118Be0B961A5e938d003C6d690d7ce99
@@ -73,11 +76,11 @@ Primero hacemos el deposito del `WETH` que representa al colateral, para asi obt
 npx ts-node scripts/tx/deposit.ts
 ```
 
-El script `deposit.ts` deposita en la variable `amount` la cantidad de 0.001 `WETH`, cambiar ese valor a su criterio, dependiendo de la cantidad de WETH que disponga en la wallet como colateral.
+El script `deposit.ts` deposita en la variable `amount` la cantidad de 0.001 `WETH`, cambiar ese valor a su criterio, dependiendo de la cantidad de `WETH` que disponga en la wallet como colateral.
 
 ## Open Position
 
-Una vez obtenidos los `vUSD` para abrir posiciones (el token `vUSD` tiene 6 decimales, puede consultar en la funcion 13. [getFreeCollateral](https://goerli-optimism.etherscan.io/address/0x253d7430118be0b961a5e938d003c6d690d7ce99#readProxyContract) la disponibilidad de `vUSD` que tiene), procedemos a realizar un long a `vMatic` por ejemplo.
+Una vez depositado el `WETH` y obtenidos los `vUSD` para abrir posiciones (el token `vUSD` tiene 6 decimales, puede consultar en la funcion [getFreeCollateral](https://goerli-optimism.etherscan.io/address/0x253d7430118be0b961a5e938d003c6d690d7ce99#readProxyContract) la disponibilidad de `vUSD` que tiene la wallet de prueba), procedemos a realizar un long a por ejemplo `vMatic`.
 
 ```bash
 npx ts-node scripts/tx/openPosition.ts
