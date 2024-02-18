@@ -27,7 +27,7 @@ const deposit = async (token: string, amount: string): Promise<void> => {
     }
 }
 
-const token = "0xa4f0bE8ADf3b2f46Ecbe49dcde858eC63783A7Cb"
-const amount = "1"
+const token = "0x4200000000000000000000000000000000000006"
+const amount = "0.001"
 
 deposit(token, amount)

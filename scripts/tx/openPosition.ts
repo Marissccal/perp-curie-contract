@@ -19,7 +19,7 @@ const openPosition = async () => {
     try {
         //
         const params = {
-            baseToken: "0xa4f0bE8ADf3b2f46Ecbe49dcde858eC63783A7Cb", //
+            baseToken: "0x77c2136c7f88645aE48cfFDCAa1A30bb8b7639F0", //
             isBaseToQuote: false, //
             isExactInput: true, //
             amount: ethers.utils.parseUnits("1", 18), //
